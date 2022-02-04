@@ -25,7 +25,7 @@ const Signup = () => {
   return (
     <>
       <div className="p-4 box">
-        <h2 className="mb-3">Firebase Auth Signup</h2>
+        <h2 className="mb-3 text-center text-capitalize"> Sign-up</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -45,7 +45,7 @@ const Signup = () => {
           </Form.Group>
 
           <div className="d-grid gap-2">
-            <Button variant="primary" type="Submit">
+            <Button variant="warning" type="Submit">
               Sign up
             </Button>
           </div>
