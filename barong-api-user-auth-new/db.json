@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "json@gmail.com",
+      "password": "233444"
+    },
+    {
+      "name": "nishat",
+      "email": "nishat@mail.com",
+      "password": "11111",
+      "id": 2
+    },
+    {
+      "name": "mobasherreza",
+      "email": "mobasher@gmail.com",
+      "password": "77777777",
+      "id": 3
+    },
+    {
+      "name": "test1",
+      "email": "test1@gmail.com",
+      "password": "444444rrr",
+      "id": 4
+    },
+    {
+      "name": "test2",
+      "email": "test2@gmail.com",
+      "password": "757575757",
+      "id": 5
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "id": 6
+    }
+  ]
+}
