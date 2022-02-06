@@ -23,7 +23,7 @@ const Login = () => {
     async function login() {
         console.warn(email, password)
         let item = { email, password }
-        let result = await fetch("https://cp.btfd.cc/api/v2/barong/identity/users",
+        let result = await fetch("https://cp.btfd.cc/api/v2/barong/identity/sessions",
 
             {
                 method: 'POST',
