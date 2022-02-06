@@ -35,7 +35,7 @@ const Register = () => {
             )
 
         } else if (item.password !== item.confirmPassword) {
-            toast.warn("Password didn't match",
+            toast.warn("Password didn't match!",
                 { position: "top-center" }
             );
 
