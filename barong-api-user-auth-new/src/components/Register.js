@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Register = () => {
@@ -9,34 +11,59 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-
     const navigate = useNavigate();
+    // const [formErrors, setFormErrors] = useState({})
 
 
-
-    const signUp = async () => {
-
-        let item = { email, password }
+    const onSubmit = async (e) => {
+        e.preventDefault();
 
 
+        let item = { email, password, confirmPassword }
+        console.log(item)
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-        let result = await fetch("https://cp.btfd.cc/api/v2/barong/identity/users",
+        if (!item.email || !item.password || !item.confirmPassword) {
 
-            {
-                method: 'POST',
-                body: JSON.stringify(item),
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                }
-            })
+            toast("Can't submit! You misssed a field!",
+                { position: "top-center" }
+            );
 
-        result = await result.json()
-        console.warn("result", result)
-        localStorage.setItem("user-info", JSON.stringify(result))
-        navigate('/email-verification');
+        } else if (!regex.test(item.email)) {
+            toast.warn("This is not a valid email!",
+                { position: "top-center" }
+            )
+
+        } else if (item.password !== item.confirmPassword) {
+            toast.warn("Password didn't match",
+                { position: "top-center" }
+            );
+
+        } else {
+
+            let result = await fetch("https://cp.btfd.cc/api/v2/barong/identity/users",
+
+                {
+                    method: 'POST',
+                    body: JSON.stringify(item),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                })
+
+            result = await result.json()
+            // console.warn("result", result)
+
+            localStorage.setItem("user-info", JSON.stringify(result))
+            navigate('/email-verification');
+
+
+        }
+
 
     }
+
 
 
     return (
@@ -50,19 +77,24 @@ const Register = () => {
                 </div>
                 <br />
 
+                <form action="" className="register-form" onSubmit={onSubmit}>
 
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" placeholder="Email" />
-                <br />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" placeholder="Email" />
+                    <br />
 
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" placeholder="Password" />
-                <br />
-                <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="form-control" placeholder="Confirm Password" />
-                <br />
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" placeholder="Password" />
+                    <br />
+                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="form-control" placeholder="Confirm Password" />
+                    <br />
 
 
-                <button onClick={signUp} className="btn btn-sign">Sign Up</button>
+                    {/* <button  onClick={signUp} className="btn btn-sign">Sign Up</button> */}
+
+                    <input type="submit" value="Sign Up" className="btn btn-sign" />
+                </form>
+
             </div>
-
+            <ToastContainer />
 
         </div>
 
