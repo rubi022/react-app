@@ -1,25 +1,25 @@
 
 import React, { useState } from "react";
-// import { useHistory } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
 
 const Register = () => {
 
-    const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+
     const navigate = useNavigate();
 
 
 
     const signUp = async () => {
 
-        let item = { username, email, password }
-
-        console.warn(item)
+        let item = { email, password }
 
 
-        // let result = await fetch("http://localhost:5000/users",
+
         let result = await fetch("https://cp.btfd.cc/api/v2/barong/identity/users",
 
             {
@@ -32,29 +32,38 @@ const Register = () => {
             })
 
         result = await result.json()
-        // console.warn("result", result)
+        console.warn("result", result)
         localStorage.setItem("user-info", JSON.stringify(result))
-        // history.push("/login")
-        navigate('/login');
+        navigate('/email-verification');
 
     }
 
 
     return (
 
-        <div className="col-sm-6 offset-sm-3">
+        <div className="col-sm-4 offset-sm-4 resgister-div">
+            <div className="card card-sign">
+                <div className="btn-group">
+                    <Link to="/register" className="btn btn-group-top-reg active" aria-current="page">SIGN UP </Link>
+                    <Link to="/login" className="btn btn-group-top-log">SIGN IN</Link>
 
-            <h3> Register Page</h3>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="form-control" placeholder="Username" />
-            <br />
+                </div>
+                <br />
 
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" placeholder="Email" />
-            <br />
 
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" placeholder="Password" />
-            <br />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" placeholder="Email" />
+                <br />
 
-            <button onClick={signUp} className="btn btn-primary">Sign Up</button>
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" placeholder="Password" />
+                <br />
+                <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="form-control" placeholder="Confirm Password" />
+                <br />
+
+
+                <button onClick={signUp} className="btn btn-sign">Sign Up</button>
+            </div>
+
+
         </div>
 
     )
