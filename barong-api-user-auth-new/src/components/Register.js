@@ -20,7 +20,7 @@ const Register = () => {
 
 
         let item = { email, password, confirmPassword }
-        console.log(item)
+        // console.log(item)
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
         if (!item.email || !item.password || !item.confirmPassword) {
@@ -71,8 +71,9 @@ const Register = () => {
 
             } else {
 
+                const data = await result.json()
 
-                localStorage.setItem("user-info", JSON.stringify(result))
+                localStorage.setItem("user-info", JSON.stringify(data))
                 navigate('/email-verification');
             }
         }

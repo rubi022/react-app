@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -10,6 +10,12 @@ const VerifyEmail = () => {
         toast.success("Succesfully Registered! Please verify email.",
             { position: "top-center" }
         );
+
+        // const getIteminfo = localStorage.getItem('user-info')
+        // console.log(getIteminfo)
+
+
+
     })
 
 
