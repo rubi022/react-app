@@ -25,7 +25,7 @@ const Register = () => {
 
         if (!item.email || !item.password || !item.confirmPassword) {
 
-            toast("Can't submit! You misssed a field!",
+            toast("Oops! You misssed a field!",
                 { position: "top-center" }
             );
 
@@ -52,13 +52,17 @@ const Register = () => {
                     }
                 })
 
-            result = await result.json()
-            // console.warn("result", result)
+            if (!result.ok) {
+                result = await result.json()
+                toast.warn(`${result.errors[0]}`,
+                    { position: "top-center" }
+                );
 
-            localStorage.setItem("user-info", JSON.stringify(result))
-            navigate('/email-verification');
+            } else {
 
-
+                localStorage.setItem("user-info", JSON.stringify(result))
+                navigate('/email-verification');
+            }
         }
 
 
