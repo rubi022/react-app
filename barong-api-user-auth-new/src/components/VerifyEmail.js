@@ -1,5 +1,18 @@
+import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+
+
 
 const VerifyEmail = () => {
+    useEffect(() => {
+
+
+        toast.success("Succesfully Registered! Please verify email.",
+            { position: "top-center" }
+        );
+    })
+
+
     return (
 
         <div className="verify-email-div">
@@ -8,6 +21,9 @@ const VerifyEmail = () => {
                 <h3>Verify email</h3>
                 <button className="btn btn-info"> Verify</button>
             </div>
+
+            <ToastContainer />
+
         </div>
     )
 };

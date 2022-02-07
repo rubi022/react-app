@@ -71,6 +71,7 @@ const Register = () => {
 
             } else {
 
+
                 localStorage.setItem("user-info", JSON.stringify(result))
                 navigate('/email-verification');
             }
