@@ -54,7 +54,18 @@ const Register = () => {
 
             if (!result.ok) {
                 result = await result.json()
-                toast.warn(`${result.errors[0]}`,
+                let errorMessage = ""
+
+                if (result.errors[0] === "password.requirements") {
+                    errorMessage = "Password requiremnts not matched!"
+                } else if (result.errors[0] === "email.taken") {
+                    errorMessage = "Email is taken!"
+
+
+                }
+
+
+                toast.warn(`${errorMessage}`,
                     { position: "top-center" }
                 );
 
