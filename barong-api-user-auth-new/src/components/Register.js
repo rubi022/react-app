@@ -57,7 +57,7 @@ const Register = () => {
                 let errorMessage = ""
 
                 if (result.errors[0] === "password.requirements") {
-                    errorMessage = "Password requiremnts not matched!"
+                    errorMessage = "Password requirements not matched!"
                 } else if (result.errors[0] === "email.taken") {
                     errorMessage = "Email is taken!"
 
