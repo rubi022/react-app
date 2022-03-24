@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import React, { useState } from "react";
 // import React, { useState, useEffect } from "react";
 
-const Login = () => {
+const Login = ({ user, setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  console.log({ user });
+  if (user) return <Navigate to="/" />;
   // const navigate = useNavigate();
 
   async function onSubmit(e) {
@@ -25,8 +26,9 @@ const Login = () => {
       }
     );
     result = await result.json();
-    console.warn("result", result);
+    console.log("result", result);
     localStorage.setItem("user-info", JSON.stringify(result));
+    setUser(result);
     // navigate('/product');
   }
   return (
@@ -67,7 +69,9 @@ const Login = () => {
           />
           <br />
 
-          {/* <button onClick={login} className="btn btn-sign">Login</button> */}
+          {/* <button onClick={(e) => onSubmit(e)} className="btn btn-sign">
+            Login
+          </button> */}
           <input type="submit" value="Login" className="btn btn-sign" />
         </form>
       </div>
