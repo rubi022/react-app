@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const userDetails = JSON.parse(localStorage.getItem("user-info"));
+const Navbar = ({ setUser, user }) => {
+  const handleLogout = async () => {
+    localStorage.removeItem("user-info");
+    setTimeout(() => {
+      setUser("");
+    }, 100);
+  };
   return (
     <nav className="navbar navbar-expand-lg ">
       <div className="container-fluid">
@@ -13,7 +18,7 @@ const Navbar = () => {
               </a>
             </li>
           </ul>
-          {!userDetails && (
+          {!user ? (
             <form className="d-flex right-nav-item">
               <Link className="nav-link" to="/login">
                 LOG IN
@@ -24,6 +29,12 @@ const Navbar = () => {
               >
                 REGISTER
               </Link>
+            </form>
+          ) : (
+            <form className="d-flex right-nav-item" onClick={handleLogout}>
+              <span className="nav-link btn btn-register-nav btn-sm">
+                LOGOUT
+              </span>
             </form>
           )}
         </div>
