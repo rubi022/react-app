@@ -5,7 +5,7 @@ import React, { useState } from "react";
 const Login = ({ user, setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log({ user });
+  const [keepLogged, setKeepLogged] = useState(false);
   if (user) return <Navigate to="/" />;
   // const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const Login = ({ user, setUser }) => {
     );
     result = await result.json();
     console.log("result", result);
-    localStorage.setItem("user-info", JSON.stringify(result));
+    if (keepLogged) localStorage.setItem("user-info", JSON.stringify(result));
     setUser(result);
     // navigate('/product');
   }
@@ -58,7 +58,6 @@ const Login = ({ user, setUser }) => {
             required
           />
           <br />
-
           <input
             type="password"
             value={password}
@@ -68,7 +67,16 @@ const Login = ({ user, setUser }) => {
             required
           />
           <br />
-
+          <input
+            checked={keepLogged}
+            onChange={(e) => setKeepLogged(e.target.checked)}
+            type="checkbox"
+          />{" "}
+          <span style={{ marginLeft: "10px", color: "#FFF" }}>
+            Keep me logged in
+          </span>
+          <br />
+          <br />
           {/* <button onClick={(e) => onSubmit(e)} className="btn btn-sign">
             Login
           </button> */}
