@@ -1,5 +1,6 @@
 import { Link, Navigate } from "react-router-dom";
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 // import React, { useState, useEffect } from "react";
 
 const Login = ({ user, setUser }) => {
@@ -26,6 +27,11 @@ const Login = ({ user, setUser }) => {
       }
     );
     result = await result.json();
+    console.log({ result });
+    if (result?.errors)
+      return toast.error("Authentication failed", {
+        position: "top-center",
+      });
     console.log("result", result);
     if (keepLogged) localStorage.setItem("user-info", JSON.stringify(result));
     setUser(result);
@@ -33,6 +39,7 @@ const Login = ({ user, setUser }) => {
   }
   return (
     <div className="col-sm-4 offset-sm-4 resgister-div">
+      <ToastContainer />
       <div className="card card-sign">
         <div className="btn-group">
           <Link
