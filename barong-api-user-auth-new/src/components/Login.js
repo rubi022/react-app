@@ -1,6 +1,7 @@
 import { Link, Navigate } from "react-router-dom";
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { setWithExpiry } from "../helper/utils";
 // import React, { useState, useEffect } from "react";
 
 const Login = ({ user, setUser }) => {
@@ -33,7 +34,9 @@ const Login = ({ user, setUser }) => {
         position: "top-center",
       });
     console.log("result", result);
-    if (keepLogged) localStorage.setItem("user-info", JSON.stringify(result));
+    if (keepLogged) setWithExpiry("user-info", result, 86400000);
+    //  localStorage.setItem("user-info", JSON.stringify(result));
+
     setUser(result);
     // navigate('/product');
   }

@@ -7,13 +7,14 @@ import Login from "./components/Login";
 import LandingPage from "./components/LandingPage";
 import VerifyEmail from "./components/VerifyEmail";
 import { useCallback, useEffect, useState } from "react";
+import { getWithExpiry } from "./helper/utils";
 
 function App() {
   const [user, setUser] = useState();
-  const userDetails = JSON.parse(localStorage.getItem("user-info"));
-
+  const value = getWithExpiry("user-info");
+  console.log({ value });
   const loadUser = useCallback(() => {
-    setUser(userDetails);
+    setUser(value);
   }, []);
 
   useEffect(() => {
